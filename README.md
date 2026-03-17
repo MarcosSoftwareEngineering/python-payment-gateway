@@ -115,7 +115,7 @@ Vá para [http://127.0.0.1:8000/docs](https://www.google.com/search?q=http://127
 
 ---
 
-Desenvolvido por **Marcos Vinicius** - [MarcosSoftwareEngineering](https://www.google.com/search?q=https://marcos-dev-zeta.vercel.app/)
+Desenvolvido por **Marcos Vinicius** - [MarcosSoftwareEngineering](https://marcos-dev-zeta.vercel.app/))
 
 ```
 
