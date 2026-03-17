@@ -49,12 +49,6 @@ uvicorn main:app --reload
 
 Vá para http://127.0.0.1:8000/docs para testar os endpoints via Swagger UI.
 
-O seu README atual está bom, mas como você elevou o nível do projeto hoje usando **FastAPI** e **Swagger**, ele precisa refletir essa maturidade técnica. Vamos adicionar a parte do **LuizaLabs**, as instruções de como rodar o servidor e a tabela de endpoints.
-
-Aqui está o código Markdown atualizado para você copiar e colar no seu `README.md`:
-
-```markdown
-# 💳 Gateway de Pagamento em Python | LuizaLabs Project
 
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 ![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)
