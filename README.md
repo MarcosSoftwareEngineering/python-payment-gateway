@@ -1,72 +1,96 @@
-O Gemini disse
-Com certeza. Vamos elevar o nível do seu README.md utilizando uma estrutura de documentação técnica de mercado, com foco em legibilidade, arquitetura e boas práticas de Engenharia de Software.
+# 💳 Payment Gateway API | LuizaLabs Ecosystem
 
-Aqui está a versão refinada e profissional:
+![Python](https://img.shields.io/badge/Python-3.14+-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)
+![Uvicorn](https://img.shields.io/badge/Uvicorn-20232A?style=for-the-badge&logo=python&logoColor=white)
+![Pydantic](https://img.shields.io/badge/Pydantic-E92063?style=for-the-badge&logo=pydantic&logoColor=white)
 
-💳 Payment Gateway API | LuizaLabs Project
-Este projeto consiste em um microserviço de Gateway de Pagamento de alta performance, desenvolvido com foco em escalabilidade e baixo acoplamento. A arquitetura foi concebida seguindo os padrões discutidos no ecossistema da LuizaLabs, utilizando o framework FastAPI para garantir processamento assíncrono e validação rigorosa de dados.
+Este microsserviço simula um **Gateway de Pagamento** de alta disponibilidade e baixo acoplamento. Desenvolvido sob a ótica da Engenharia de Software moderna e inspirado nos desafios arquiteturais do ecossistema **LuizaLabs**, o projeto utiliza FastAPI para garantir processamento assíncrono, validação estrita de contratos de dados e escalabilidade horizontal.
 
-🎯 Objetivos do Projeto
-Prover uma interface robusta para simulação de transações financeiras, garantindo:
+---
 
-Integridade: Validação de payloads complexos.
+## 🏗️ Arquitetura e Decisões de Design
 
-Rastreabilidade: Identificação única via UUID v4.
+A aplicação foi estruturada focando em **Separação de Preocupações (SoC)** e performance de I/O:
 
-Performance: Processamento não-bloqueante via async/await.
+* **Processamento Assíncrono:** Utilização intensiva de `async/await` no event loop do FastAPI para lidar com alto volume de concorrência sem bloqueio de threads.
+* **Data Transfer Objects (DTOs):** Implementação de tipagem estrita e validação de schemas de entrada/saída através do Pydantic V2, garantindo que o core da aplicação processe apenas dados íntegros.
+* **Idempotência e Rastreabilidade:** Geração de identificadores únicos universais (UUIDv4) no momento da ingestão da requisição, facilitando auditoria e tracing distribuído.
 
-🚀 Funcionalidades Principais
-Processamento Assíncrono: Otimização de I/O para alta densidade de requisições.
+---
 
-Data Validation (Pydantic V2): Tipagem forte que impede a persistência de dados inconsistentes.
+## 🚀 Funcionalidades
 
-Geração de ID Único: Cada transação é indexada por um identificador universal (UUID).
+**Core Financeiro**
+* [x] Processamento transacional assíncrono.
+* [x] Geração automática de `transaction_id` (UUID).
+* [x] Auditoria em tempo real via buffer de memória.
 
-Auditoria em Memória: Estrutura de dados otimizada para consulta rápida de histórico transacional.
+**Infraestrutura e Segurança (Roadmap)**
+* [ ] **Persistência Volumétrica:** Migração do estado em memória para um banco de dados relacional (PostgreSQL) via ORM (SQLAlchemy).
+* [ ] **Autenticação:** Implementação de API Keys e JWT (Bearer) para proteção de endpoints sensíveis.
+* [ ] **Qualidade:** Cobertura de testes unitários e de integração utilizando `pytest`.
 
-Documentação Automática: Swagger UI integrada nativamente para testes em tempo real.
+---
 
-🛠️ Stack Tecnológica
-Linguagem: Python 3.12+ (Foco em Type Hinting)
+## 📂 Contrato de API (Endpoints)
 
-Framework: FastAPI
+A documentação interativa completa (OpenAPI/Swagger) está disponível em `/docs` ao rodar a aplicação.
 
-Servidor ASGI: Uvicorn
+| Método | Endpoint | Descrição Técnica | Status Esperado |
+| :--- | :--- | :--- | :--- |
+| `POST` | `/processar` | Ingestão de payload, validação de regras e efetivação do pagamento. | `201 Created` |
+| `GET` | `/historico` | Recupera a coleção completa do log de operações transacionais. | `200 OK` |
+| `GET` | `/transacao/{id}` | Busca granular por chave primária (UUID) de uma transação específica. | `200 OK` / `404 Not Found` |
 
-Validação de Schemas: Pydantic
+---
 
-📂 Arquitetura de Endpoints
-Método	Rota	Descrição Técnica
-POST	/processar	Ingestão de pagamento, validação de regras de negócio e retorno de ID.
-GET	/historico	Recuperação do buffer de transações em memória.
-GET	/transacao/{id}	Busca granular por chave primária (UUID).
-⚙️ Guia de Instalação e Execução
-1. Clonagem e Ambiente
-Bash
-# Clonar o repositório oficial
-git clone https://github.com/MarcosSoftwareEngineering/python-payment-gateway.git
-cd python-payment-gateway
+## ⚙️ Guia de Desenvolvimento
 
-# Configurar Ambiente Virtual (VENV)
-python -m venv venv
-source venv/bin/activate  # Linux/macOS
-.\venv\Scripts\activate   # Windows
-2. Gerenciamento de Dependências
-Bash
-pip install fastapi uvicorn pydantic
-3. Execução do Servidor
-Bash
-# Inicia o servidor em modo hot-reload na porta 8000
+### Pré-requisitos
+* Python 3.14 ou superior instalado.
+* Gerenciador de pacotes `pip`.
+
+### Setup do Ambiente
+
+1. **Clonagem do Repositório:**
+   ```bash
+   git clone [https://github.com/MarcosSoftwareEngineering/python-payment-gateway.git](https://github.com/MarcosSoftwareEngineering/python-payment-gateway.git)
+   cd python-payment-gateway
+   ```
+
+2. **Isolamento de Ambiente (Virtualenv):**
+   ```bash
+   python -m venv venv
+   
+   # Ativação (Windows)
+   .\venv\Scripts\activate
+   
+   # Ativação (Linux/macOS)
+   source venv/bin/activate
+   ```
+
+3. **Instalação de Dependências:**
+   ```bash
+   pip install fastapi uvicorn pydantic
+   ```
+
+### Execução Local
+
+Para subir o servidor ASGI com hot-reload ativo (ideal para desenvolvimento):
+```bash
 uvicorn main:app --reload
-🛣️ Roadmap de Evolução
-[ ] Persistência de Dados: Implementação de camadas de repositório com PostgreSQL.
+```
 
-[ ] Segurança: Autenticação via Bearer Token (JWT).
+Acesse a interface visual para testes de chamadas HTTP:
+👉 **[http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)**
 
-[ ] Containerização: Criação de imagem Docker para orquestração.
+---
 
-[ ] Testes: Cobertura de testes unitários com Pytest.
+## 👨‍💻 Autor
 
-👨‍💻 Autor
-Marcos Vinicius
-Engenheiro de Software em Formação | Especialista Front-End & React.js
+**Marcos Vinicius**
+*Estudante de Engenharia de Software | Desenvolvedor Front-End*
+
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=flat-square&logo=github&logoColor=white)](https://github.com/MarcosSoftwareEngineering)
+[![Portfolio](https://img.shields.io/badge/Portfolio-000000?style=flat-square&logo=vercel&logoColor=white)](https://marcos-dev-zeta.vercel.app/)
