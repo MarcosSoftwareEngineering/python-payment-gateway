@@ -5,7 +5,7 @@
 ![Uvicorn](https://img.shields.io/badge/Uvicorn-20232A?style=for-the-badge&logo=python&logoColor=white)
 ![Pydantic](https://img.shields.io/badge/Pydantic-E92063?style=for-the-badge&logo=pydantic&logoColor=white)
 
-Este microsserviço simula um **Gateway de Pagamento** de alta disponibilidade e baixo acoplamento. Desenvolvido sob a ótica da Engenharia de Software moderna e inspirado nos desafios arquiteturais do ecossistema **LuizaLabs**, o projeto utiliza FastAPI para garantir processamento assíncrono, validação estrita de contratos de dados e escalabilidade horizontal.
+Este microsserviço simula um **Gateway de Pagamento** de alta disponibilidade e baixo acoplamento. Desenvolvido sob a ótica da Engenharia de Software moderna e inspirado nos desafios arquiteturais do ecossistema , o projeto utiliza FastAPI para garantir processamento assíncrono, validação estrita de contratos de dados e escalabilidade horizontal.
 
 ---
 
